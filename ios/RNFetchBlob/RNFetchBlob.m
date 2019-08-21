@@ -70,7 +70,8 @@ RCT_EXPORT_MODULE();
     return @{
              @"MainBundleDir" : [RNFetchBlobFS getMainBundleDir],
              @"DocumentDir": [RNFetchBlobFS getDocumentDir],
-             @"CacheDir" : [RNFetchBlobFS getCacheDir]
+             @"CacheDir" : [RNFetchBlobFS getCacheDir],
+             @"TempDir": [RNFetchBlobFS getTempPath]
              };
 }
 
@@ -479,7 +480,7 @@ RCT_EXPORT_METHOD(readFile:(NSString *)path
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
-    
+
     [RNFetchBlobFS readFile:path encoding:encoding onComplete:^(NSData * content, NSString * code, NSString * err) {
         if(err != nil) {
             reject(code, err, nil);
